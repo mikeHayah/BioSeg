@@ -198,7 +198,7 @@ class U_Net_plus(nn.Module):
 
         self.Conv_1x1 = nn.Conv2d(64,output_ch,kernel_size=1,stride=1,padding=0)
 
-        self.projection6 = nn.Conv2d(2048, 1, kernel_size=1)                   # model 10-2-2025 
+        self.projection6 = nn.Conv2d(2048, 1, kernel_size=1)                   
         self.projection5 = nn.Conv2d(1024, 1, kernel_size=1) 
         self.projection4 = nn.Conv2d(512, 1, kernel_size=1) 
         self.projection3 = nn.Conv2d(256, 1, kernel_size=1) 
