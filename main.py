@@ -23,10 +23,7 @@ from infer_patches import make_prediction, normalize_patches, post3d_process
 
 def main(config):
     cudnn.benchmark = True
-    # if config.model_type not in ['U_Net','R2U_Net','AttU_Net','R2AttU_Net','StandardUNet','U_Net_plus']:
-    #     print('ERROR!! model_type should be selected in U_Net/R2U_Net/AttU_Net/R2AttU_Net')
-    #     print('Your input for model_type was %s'%config.model_type)
-    #     return
+    
 
     # Create directories if not exist
     if not os.path.exists(config.model_path):
@@ -70,10 +67,6 @@ def main(config):
                             mode='test',
                             augmentation_prob=0.)
 
-    # train_dataset = det_my_dataset(image_path=config.train_path)
-    # valid_dataset = det_my_dataset(image_path=config.valid_path)
-    # test_dataset = det_my_dataset(image_path=config.test_path)
-
     solver = Solver(config, train_loader, valid_loader, test_loader)
     # solver.train()     # for debugging 
     # make_prediction("./models/U_Net_plus-172-5.8009-2.5555-final.pkl", config.test_path)   # for debugging 
@@ -90,10 +83,7 @@ if __name__ == '__main__':
 
     
     # model hyper-parameters
-    #parser.add_argument('--image_size', type=int, default=(1103, 744))
-    #parser.add_argument('--image_size', type=int, default=(901,301))
     parser.add_argument('--image_size', type=int, default=(1024,1024))
-    parser.add_argument('--t', type=int, default=3, help='t for Recurrent step of R2U_Net or R2AttU_Net')
     
     # training hyper-parameters
     parser.add_argument('--img_ch', type=int, default=1)
@@ -112,18 +102,17 @@ if __name__ == '__main__':
 
     # misc
     parser.add_argument('--mode', type=str, default='test')
-    parser.add_argument('--model_type', type=str, default='U_Net_plus', help='U_Net/U_Net_plus')
+    parser.add_argument('--model_type', type=str, default='U_Net_plus')
     parser.add_argument('--model_path', type=str, default='./models/')
     parser.add_argument('--train_path', type=str, default='./dataset/train/')
     parser.add_argument('--valid_path', type=str, default='./dataset/valid/')
-    parser.add_argument('--test_path', type=str, default='./dataset/experiments/exp9/')
+    parser.add_argument('--test_path', type=str, default='./dataset/test/')
     parser.add_argument('--result_path', type=str, default='./result/')
 
     parser.add_argument('--cuda_idx', type=int, default=1)
 
     config = parser.parse_args()
 
-    #averag_threshold('./dataset/experiments/exp9/mask_attP4/')
     main(config)
     
     
