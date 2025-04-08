@@ -199,12 +199,7 @@ class MainWindow(QWidget):
         if (self.mode == 'train'):
             self.train_thread.start()
         else:
-            self.inference_thread.started.connect(make_prediction("./models/networkOm3/U_Net_plus-94-10.5900-2.9149-best_train.pkl", self.test_path))
-            #self.inference_thread.started.connect(normalize_patches (self.test_path))
-            #self.inference_thread.started.connect(post3d_process(self.test_path))
-            #self.inference_thread.started.connect(img_mode(self.test_path))
-            #self.inference_thread.started.connect(hugging_face_inference(self.test_path))
-            #self.inference_thread.start()
+            self.inference_thread.started.connect(make_prediction("./models/networkOm3/U_Net_plus-94-10.5900-2.9149-best_train.pkl", self.test_path)
 
     def on_training_finished(self):
         print("Training finished!")
